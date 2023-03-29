@@ -1,0 +1,14 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /soccer-club-census
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/soccer-club-census-db
+    username: difelix
+    password: 123
+    driverClassName: org.postgresql.Driver
+  jpa:
+    hibernate:
+      show-sql: true
