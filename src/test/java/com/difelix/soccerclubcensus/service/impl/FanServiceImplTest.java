@@ -14,6 +14,7 @@ import com.difelix.soccerclubcensus.domain.enums.StateEnum;
 import com.difelix.soccerclubcensus.exceptions.BusinessException;
 import com.difelix.soccerclubcensus.exceptions.enums.ErrorCode;
 import com.difelix.soccerclubcensus.repository.FanRepository;
+import com.difelix.soccerclubcensus.service.SoccerTeamService;
 import java.math.BigInteger;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,6 +29,9 @@ class FanServiceImplTest {
   @Mock
   private FanRepository fanRepository;
 
+  @Mock
+  private SoccerTeamService soccerTeamService;
+
   @InjectMocks
   private FanServiceImpl fanService;
 
@@ -35,11 +39,13 @@ class FanServiceImplTest {
   @DisplayName("should save fan with success")
   void test1() {
     final Fan fan = buildFanObject();
+    final SoccerTeam soccerTeam = fan.getSoccerTeam();
 
     when(fanRepository.existsByCpf(fan.getCpf())).thenReturn(false);
+    when(soccerTeamService.findByName(soccerTeam.getName())).thenReturn(soccerTeam);
     when(fanRepository.save(fan)).thenReturn(fan);
 
-    final Fan fanSaved = fanService.create(fan);
+    final Fan fanSaved = fanService.create(fan, soccerTeam.getName());
 
     assertNotNull(fanSaved);
   }
@@ -48,12 +54,13 @@ class FanServiceImplTest {
   @DisplayName("should throws exception when cpf already exists")
   void test2() {
     final Fan fan = buildFanObject();
+    final String soccerTeamName = "Sao Paulo Futebol Clube";
 
     when(fanRepository.existsByCpf(fan.getCpf())).thenReturn(true);
 
     BusinessException businessException = assertThrows(
         BusinessException.class,
-        () -> fanService.create(fan)
+        () -> fanService.create(fan, soccerTeamName)
     );
 
     assertEquals(ErrorCode.INVALID_CPF, businessException.getErrorCode());

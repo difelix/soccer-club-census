@@ -2,6 +2,8 @@ package com.difelix.soccerclubcensus.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -25,6 +27,7 @@ import lombok.Setter;
 public class Fan {
 
   @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private BigInteger id;
 
   @Column(name = "name", nullable = false)
@@ -44,6 +47,6 @@ public class Fan {
   private Timestamp updatedAt;
 
   @OneToOne
-  @JoinColumn(name = "soccer-team-id", referencedColumnName = "id")
+  @JoinColumn(name = "soccer_team_id", referencedColumnName = "id")
   private SoccerTeam soccerTeam;
 }

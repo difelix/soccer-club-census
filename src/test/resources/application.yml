@@ -5,10 +5,10 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/soccer-club-census-db
+    url: jdbc:h2:mem:soccer-club-census-db;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
     username: difelix
     password: 123
-    driverClassName: org.postgresql.Driver
+    driverClassName: org.h2.Driver
   jpa:
     show-sql: true
     properties:

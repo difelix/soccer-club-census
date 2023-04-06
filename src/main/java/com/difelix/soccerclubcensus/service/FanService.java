@@ -4,5 +4,5 @@ import com.difelix.soccerclubcensus.domain.entity.Fan;
 
 public interface FanService {
 
-  Fan create(Fan fan);
+  Fan create(Fan fan, String soccerTeamName);
 }
