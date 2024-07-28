@@ -1,10 +1,14 @@
 package com.difelix.soccerclubcensus.service.impl;
 
+import com.difelix.soccerclubcensus.domain.dto.request.SoccerTeamRequest;
+import com.difelix.soccerclubcensus.domain.dto.response.SoccerTeamResponse;
 import com.difelix.soccerclubcensus.domain.entity.SoccerTeam;
 import com.difelix.soccerclubcensus.exceptions.BusinessException;
 import com.difelix.soccerclubcensus.exceptions.enums.ErrorCode;
+import com.difelix.soccerclubcensus.mappers.SoccerTeamMapper;
 import com.difelix.soccerclubcensus.repository.SoccerTeamRepository;
 import com.difelix.soccerclubcensus.service.SoccerTeamService;
+import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,5 +29,12 @@ public class SoccerTeamServiceImpl implements SoccerTeamService {
     );
 
     return soccerTeam.get();
+  }
+
+  @Override
+  public List<SoccerTeamResponse> save(List<SoccerTeamRequest> soccerTeamRequest) {
+    List<SoccerTeam> soccerTeamList = SoccerTeamMapper.toEntityList(soccerTeamRequest);
+    soccerTeamRepository.insertSoccerTeamsWithBatchInsert(soccerTeamList);
+    return SoccerTeamMapper.toResponseList(soccerTeamList);
   }
 }

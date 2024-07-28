@@ -73,7 +73,7 @@ class FanServiceImplTest {
     final SoccerTeam soccerTeam = SoccerTeam.builder()
         .id(BigInteger.ONE)
         .name("Sao Paulo Futebol Clube")
-        .state(StateEnum.SP)
+        .state(StateEnum.SP.name())
         .build();
 
     return Fan.builder()

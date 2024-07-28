@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SoccerTeamRepository extends CrudRepository<SoccerTeam, BigInteger> {
+public interface SoccerTeamRepository extends CrudRepository<SoccerTeam, BigInteger>, SoccerTeamRepositoryCustom {
 
   Optional<SoccerTeam> findByName(String name);
 }

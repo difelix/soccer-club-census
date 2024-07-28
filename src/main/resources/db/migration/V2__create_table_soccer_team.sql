@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS soccer_team(
   id BIGINT GENERATED ALWAYS AS IDENTITY,
   name VARCHAR(100) NOT NULL UNIQUE,
-  foundation_date TIMESTAMP NOT NULL,
+  foundation_date VARCHAR(11) NOT NULL,
   state VARCHAR(2) NOT NULL,
   fans_amount BIGINT NOT NULL,
   last_update TIMESTAMP NOT NULL DEFAULT now(),
